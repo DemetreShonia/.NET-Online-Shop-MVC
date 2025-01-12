@@ -10,22 +10,22 @@ using DataAccessLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
-    public class CustomersController : Controller
+    public class AddressesController : Controller
     {
         private readonly CompanyDbContext _context;
 
-        public CustomersController(CompanyDbContext context)
+        public AddressesController(CompanyDbContext context)
         {
             _context = context;
         }
 
-        // GET: Customers
+        // GET: Addresses
         public async Task<IActionResult> Table()
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(await _context.Addresses.ToListAsync());
         }
 
-        // GET: Customers/Details/5
+        // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace PresentationLayer.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-            if (customer == null)
+            var address = await _context.Addresses
+                .FirstOrDefaultAsync(m => m.AddressId == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(address);
         }
 
-        // GET: Customers/Create
+        // GET: Addresses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Addresses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,NameStyle,Title,FirstName,MiddleName,LastName,Suffix,CompanyName,SalesPerson,EmailAddress,Phone,PasswordHash,PasswordSalt,Rowguid,ModifiedDate")] Customer customer)
+        public async Task<IActionResult> Create([Bind("AddressId,AddressLine1,AddressLine2,City,StateProvince,CountryRegion,PostalCode,Rowguid,ModifiedDate")] Address address)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
+                _context.Add(address);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
-            return View(customer);
+            return View(address);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Addresses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace PresentationLayer.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var address = await _context.Addresses.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(address);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Addresses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,NameStyle,Title,FirstName,MiddleName,LastName,Suffix,CompanyName,SalesPerson,EmailAddress,Phone,PasswordHash,PasswordSalt,Rowguid,ModifiedDate")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("AddressId,AddressLine1,AddressLine2,City,StateProvince,CountryRegion,PostalCode,Rowguid,ModifiedDate")] Address address)
         {
-            if (id != customer.CustomerId)
+            if (id != address.AddressId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace PresentationLayer.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(address);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.CustomerId))
+                    if (!AddressExists(address.AddressId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace PresentationLayer.Controllers
                 }
                 return RedirectToAction(nameof(Table));
             }
-            return View(customer);
+            return View(address);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Addresses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace PresentationLayer.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-            if (customer == null)
+            var address = await _context.Addresses
+                .FirstOrDefaultAsync(m => m.AddressId == id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(address);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Addresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer != null)
+            var address = await _context.Addresses.FindAsync(id);
+            if (address != null)
             {
-                _context.Customers.Remove(customer);
+                _context.Addresses.Remove(address);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Table));
         }
 
-        private bool CustomerExists(int id)
+        private bool AddressExists(int id)
         {
-            return _context.Customers.Any(e => e.CustomerId == id);
+            return _context.Addresses.Any(e => e.AddressId == id);
         }
     }
 }

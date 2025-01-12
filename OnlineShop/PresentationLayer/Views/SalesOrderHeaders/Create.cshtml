@@ -1,0 +1,95 @@
+﻿@model DataAccessLayer.Models.SalesOrderHeader
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SalesOrderHeader</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RevisionNumber" class="control-label"></label>
+                <input asp-for="RevisionNumber" class="form-control" />
+                <span asp-validation-for="RevisionNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label"></label>
+                <input asp-for="DueDate" class="form-control" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipDate" class="control-label"></label>
+                <input asp-for="ShipDate" class="form-control" />
+                <span asp-validation-for="ShipDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseOrderNumber" class="control-label"></label>
+                <input asp-for="PurchaseOrderNumber" class="form-control" />
+                <span asp-validation-for="PurchaseOrderNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <input asp-for="AccountNumber" class="form-control" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipToAddressId" class="control-label"></label>
+                <select asp-for="ShipToAddressId" class ="form-control" asp-items="ViewBag.ShipToAddressId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillToAddressId" class="control-label"></label>
+                <select asp-for="BillToAddressId" class ="form-control" asp-items="ViewBag.BillToAddressId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipMethod" class="control-label"></label>
+                <input asp-for="ShipMethod" class="form-control" />
+                <span asp-validation-for="ShipMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditCardApprovalCode" class="control-label"></label>
+                <input asp-for="CreditCardApprovalCode" class="form-control" />
+                <span asp-validation-for="CreditCardApprovalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubTotal" class="control-label"></label>
+                <input asp-for="SubTotal" class="form-control" />
+                <span asp-validation-for="SubTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxAmt" class="control-label"></label>
+                <input asp-for="TaxAmt" class="form-control" />
+                <span asp-validation-for="TaxAmt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Freight" class="control-label"></label>
+                <input asp-for="Freight" class="form-control" />
+                <span asp-validation-for="Freight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Table">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
