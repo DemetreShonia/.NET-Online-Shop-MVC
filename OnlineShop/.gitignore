@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.pdb
+*.log
+
+# Build Results
+[Bb]in/
+[Oo]bj/
+
+# Rider
+.idea/
+.idea/*
+
+# Packages
+*.nupkg
+*.snupkg
