@@ -19,12 +19,31 @@ namespace PresentationLayer.Controllers
             _context = context;
         }
 
-        // GET: ProductCategories
         public async Task<IActionResult> Table()
         {
-            var companyDbContext = _context.ProductCategories.Include(p => p.ParentProductCategory);
-            return View(await companyDbContext.ToListAsync());
+            var productCategories = await _context.ProductCategories
+                .GroupJoin(
+                    _context.Products,
+                    category => category.ProductCategoryId,
+                    product => product.ProductCategoryId,
+                    (category, products) => new
+                    {
+                        ProductCategoryId = category.ProductCategoryId,
+                        CategoryName = category.Name,
+                        ProductCount = products.Count()
+                    })
+                .ToListAsync();
+
+            return View(productCategories); // Passing the dynamic model
         }
+
+
+        //// GET: ProductCategories
+        //public async Task<IActionResult> Table()
+        //{
+        //    var companyDbContext = _context.ProductCategories.Include(p => p.ParentProductCategory);
+        //    return View(await companyDbContext.ToListAsync());
+        //}
 
         // GET: ProductCategories/Details/5
         public async Task<IActionResult> Details(int? id)
