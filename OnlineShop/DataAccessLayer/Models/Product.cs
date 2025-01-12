@@ -61,7 +61,7 @@ public partial class Product
     /// <summary>
     /// Date the product was available for sale.
     /// </summary>
-    public DateTime SellStartDate { get; set; }
+    public DateTime? SellStartDate { get; set; }
 
     /// <summary>
     /// Date the product was no longer available for sale.

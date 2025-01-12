@@ -17,3 +17,7 @@
 # Packages
 *.nupkg
 *.snupkg
+
+
+**/wwwroot/images/*
+

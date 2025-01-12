@@ -1,4 +1,4 @@
-﻿@model DataAccessLayer.Models.Product
+﻿@model PresentationLayer.Models.ProductViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,104 +11,58 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProductNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProductNumber)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StandardCost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StandardCost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListPrice)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Size)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Size)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ListPrice)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weight)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ListPrice)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SellStartDate)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SellStartDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SellEndDate)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfOrders)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SellEndDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfOrders)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiscontinuedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiscontinuedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThumbNailPhoto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThumbNailPhoto)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ThumbnailPhotoFileName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ThumbnailPhotoFileName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rowguid)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductModelName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rowguid)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductModelName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductCategory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductCategory.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductModel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductModel.Name)
-        </dd>
+        <img class="w-100 h-100" src="/images/products/@Model.ThumbnailPhotoFileName" alt="Product Image" />
+       
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProductId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

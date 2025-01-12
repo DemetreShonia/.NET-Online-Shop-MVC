@@ -77,30 +77,74 @@ namespace PresentationLayer.Controllers
         }
 
         // GET: Products/Create
+        [HttpGet]
         public IActionResult Create()
         {
+            // Populate ViewData for dropdowns
             ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name");
             ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name");
+
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryId,ProductModelId,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,Rowguid,ModifiedDate")] Product product)
+        public async Task<IActionResult> Create(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                // Create a new Product entity from the ViewModel
+                var product = new Product
+                {
+                    Name = model.Name ?? string.Empty,
+                    ProductNumber = model.ProductNumber ?? string.Empty,
+                    ListPrice = model.ListPrice,
+                    Size = model.Size,
+                    ProductCategoryId = model.ProductCategoryId,
+                    ProductModelId = model.ProductModelId,
+                    SellStartDate = DateTime.Now,
+                    // Handle the photo upload here, for example, saving the file to a specific folder
+                };
+
+                // Handle photo upload
+                if (model.Photo != null)
+                {
+                    string folder = "images/products";
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder);
+
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    // Generate a unique file name for the uploaded photo
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.Photo.FileName);
+                    string fileSavePath = Path.Combine(filePath, fileName);
+
+                    // Save the uploaded photo to the server
+                    using (var stream = new FileStream(fileSavePath, FileMode.Create))
+                    {
+                        await model.Photo.CopyToAsync(stream);
+                    }
+
+                    // Save the file name in the ThumbnailPhotoFileName property
+                    product.ThumbnailPhotoFileName = fileName;
+                }
+
+                // Save the product to the database
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Table));
+
+                return RedirectToAction(nameof(Table)); // Redirect to the list view after creation
             }
-            ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", product.ProductCategoryId);
-            ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", product.ProductModelId);
-            return View(product);
+
+            // If model is invalid, re-populate the dropdowns and return to the create page
+            ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", model.ProductCategoryId);
+            ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", model.ProductModelId);
+
+            return View(model);
         }
+
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -226,7 +270,6 @@ namespace PresentationLayer.Controllers
             return View(productViewModel);
         }
 
-        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -238,13 +281,38 @@ namespace PresentationLayer.Controllers
                 .Include(p => p.ProductCategory)
                 .Include(p => p.ProductModel)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
             }
+            var ordersCount = await _context.SalesOrderDetails
+                .Where(o => o.ProductId == product.ProductId)
+                .CountAsync();
 
-            return View(product);
+            if (ordersCount > 0)
+            {
+                TempData["ErrorMessage"] = "This product cannot be deleted because there are associated orders.";
+                return RedirectToAction(nameof(Table));  // Redirect to the index or another appropriate action
+            }
+
+            // Map the entity to ViewModel
+            var productViewModel = new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                ProductNumber = product.ProductNumber,
+                ListPrice = product.ListPrice,
+                Size = product.Size,
+                CategoryName = product.ProductCategory?.Name,
+                NumberOfOrders = product.ProductNumber.Length,
+                ThumbnailPhotoFileName = product.ThumbnailPhotoFileName,
+                ProductModelName = product.ProductModel?.Name
+            };
+
+            return View(productViewModel); // Return the view with ViewModel
         }
+
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
