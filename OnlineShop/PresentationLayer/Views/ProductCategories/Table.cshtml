@@ -1,4 +1,4 @@
-﻿@model IEnumerable<dynamic>
+﻿@model IEnumerable<ProductCategoryViewModel>
 
 <h1>Product Categories</h1>
 
@@ -17,7 +17,7 @@
                 <td>@item.CategoryName</td>
                 <td>@item.ProductCount</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProductCategoryId">Edit</a> |
+                    <a asp-action="Edit" class="btn btn-danger" asp-route-id="@item.ProductCategoryId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ProductCategoryId">Details</a> |
                     @if (item.ProductCount == 0)  
                     {

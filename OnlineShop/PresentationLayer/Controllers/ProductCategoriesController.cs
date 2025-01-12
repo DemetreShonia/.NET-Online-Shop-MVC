@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
@@ -26,7 +27,7 @@ namespace PresentationLayer.Controllers
                     _context.Products,
                     category => category.ProductCategoryId,
                     product => product.ProductCategoryId,
-                    (category, products) => new
+                    (category, products) => new ProductCategoryViewModel
                     {
                         ProductCategoryId = category.ProductCategoryId,
                         CategoryName = category.Name,
@@ -34,7 +35,7 @@ namespace PresentationLayer.Controllers
                     })
                 .ToListAsync();
 
-            return View(productCategories); // Passing the dynamic model
+            return View(productCategories); 
         }
 
 

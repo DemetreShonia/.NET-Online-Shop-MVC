@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
+using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
@@ -19,12 +20,39 @@ namespace PresentationLayer.Controllers
             _context = context;
         }
 
-        // GET: Products
         public async Task<IActionResult> Table()
         {
-            var companyDbContext = _context.Products.Include(p => p.ProductCategory).Include(p => p.ProductModel);
-            return View(await companyDbContext.ToListAsync());
+            var products = await _context.Products
+                .Join(
+                    _context.ProductCategories,
+                    product => product.ProductCategoryId,
+                    category => category.ProductCategoryId,
+                    (product, category) => new { product, category }
+                )
+                .GroupJoin(
+                    _context.SalesOrderDetails, 
+                    product => product.product.ProductId,
+                    order => order.ProductId,
+                    (product, orders) => new ProductViewModel
+                    {
+                        ProductId = product.product.ProductId,
+                        ProductName = product.product.Name,
+                        Price = product.product.ListPrice,
+                        ProductCategoryId = product.category.ProductCategoryId,
+                        CategoryName = product.category.Name,
+                        NumberOfOrders = orders.Count()  
+                    })
+                .ToListAsync();
+
+            return View(products);
         }
+
+
+        //public async Task<IActionResult> Table()
+        //{
+        //    var companyDbContext = _context.Products.Include(p => p.ProductCategory).Include(p => p.ProductModel);
+        //    return View(await companyDbContext.ToListAsync());
+        //}
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -87,6 +115,7 @@ namespace PresentationLayer.Controllers
             }
             ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", product.ProductCategoryId);
             ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", product.ProductModelId);
+            
             return View(product);
         }
 
