@@ -7,16 +7,20 @@
       "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\views\\products\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\presentationlayer\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{269914E7-65EC-464E-8C82-43FE27CA67A4}|DataAccessLayer\\DataAccessLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\dataaccesslayer\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{269914E7-65EC-464E-8C82-43FE27CA67A4}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\presentationlayer\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\presentationlayer\\views\\salesorderheaders\\table.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\views\\salesorderheaders\\table.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\presentationlayer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|e:\\.net\\.net-online-shop-mvc\\onlineshop\\presentationlayer\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D23B2145-5F82-47CC-A14A-F9BA484AB88F}|PresentationLayer\\PresentationLayer.csproj|solutionrelative:presentationlayer\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,28 +38,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\Products\\Edit.cshtml",
-              "RelativeDocumentMoniker": "PresentationLayer\\Views\\Products\\Edit.cshtml",
-              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\Products\\Edit.cshtml",
-              "RelativeToolTip": "PresentationLayer\\Views\\Products\\Edit.cshtml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAQwCMAAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-12T12:46:10.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "PresentationLayer\\Controllers\\ProductsController.cs",
-              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "PresentationLayer\\Controllers\\ProductsController.cs",
-              "ViewState": "AQIAAG8AAAAAAAAAAAAAAHgAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Program.cs",
+              "RelativeDocumentMoniker": "PresentationLayer\\Program.cs",
+              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Program.cs",
+              "RelativeToolTip": "PresentationLayer\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T12:20:57.196Z",
+              "WhenOpened": "2025-01-12T17:03:52.084Z",
               "EditorCaption": ""
             },
             {
@@ -66,22 +57,48 @@
               "RelativeDocumentMoniker": "PresentationLayer\\Models\\ProductViewModel.cs",
               "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Models\\ProductViewModel.cs",
               "RelativeToolTip": "PresentationLayer\\Models\\ProductViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAUAAAAwAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T12:45:07.547Z",
+              "WhenOpened": "2025-01-12T15:15:38.016Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Table.cshtml",
-              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\SalesOrderHeaders\\Table.cshtml",
-              "RelativeDocumentMoniker": "PresentationLayer\\Views\\SalesOrderHeaders\\Table.cshtml",
-              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\SalesOrderHeaders\\Table.cshtml",
-              "RelativeToolTip": "PresentationLayer\\Views\\SalesOrderHeaders\\Table.cshtml",
-              "ViewState": "AQIAAG4AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\DataAccessLayer\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Models\\Product.cs",
+              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\DataAccessLayer\\Models\\Product.cs",
+              "RelativeToolTip": "DataAccessLayer\\Models\\Product.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAAAFwAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-12T15:15:53.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\Products\\Edit.cshtml",
+              "RelativeDocumentMoniker": "PresentationLayer\\Views\\Products\\Edit.cshtml",
+              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Views\\Products\\Edit.cshtml",
+              "RelativeToolTip": "PresentationLayer\\Views\\Products\\Edit.cshtml",
+              "ViewState": "AQIAADUAAAAAAAAAAAAQwEAAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-12T12:42:49.884Z",
+              "WhenOpened": "2025-01-12T12:46:10.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "PresentationLayer\\Controllers\\ProductsController.cs",
+              "ToolTip": "E:\\.NET\\.NET-Online-Shop-MVC\\OnlineShop\\PresentationLayer\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "PresentationLayer\\Controllers\\ProductsController.cs",
+              "ViewState": "AQIAAF4AAAAAAAAAAAAIwG0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-12T12:20:57.196Z",
               "EditorCaption": ""
             }
           ]

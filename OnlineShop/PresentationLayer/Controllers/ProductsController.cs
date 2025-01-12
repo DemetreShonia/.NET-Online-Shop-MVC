@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models;
 using PresentationLayer.Models;
+using static NuGet.Packaging.PackagingConstants;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PresentationLayer.Controllers
 {
@@ -36,8 +38,8 @@ namespace PresentationLayer.Controllers
                     (product, orders) => new ProductViewModel
                     {
                         ProductId = product.product.ProductId,
-                        ProductName = product.product.Name,
-                        Price = product.product.ListPrice,
+                        Name = product.product.Name,
+                        ListPrice = product.product.ListPrice,
                         ProductCategoryId = product.category.ProductCategoryId,
                         CategoryName = product.category.Name,
                         NumberOfOrders = orders.Count()  
@@ -108,25 +110,45 @@ namespace PresentationLayer.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include(p => p.ProductCategory)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
             if (product == null)
             {
                 return NotFound();
             }
+
+            var orders = await _context.SalesOrderDetails
+                .Where(o => o.ProductId == product.ProductId)
+                .CountAsync();
+
+            var productViewModel = new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                ProductNumber = product.ProductNumber,
+                ListPrice = product.ListPrice,
+                Size = product.Size,
+                ProductCategoryId = product.ProductCategoryId,
+                ProductModelId = product.ProductModelId,
+                CategoryName = product.ProductCategory?.Name ?? string.Empty,
+                NumberOfOrders = orders,
+                ThumbnailPhotoFileName = product.ThumbnailPhotoFileName
+            };
+
             ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", product.ProductCategoryId);
             ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", product.ProductModelId);
-            
-            return View(product);
+
+            return View(productViewModel);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryId,ProductModelId,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,Rowguid,ModifiedDate")] Product product)
+        public async Task<IActionResult> Edit(int id, ProductViewModel productViewModel)
         {
-            if (id != product.ProductId)
+            if (id != productViewModel.ProductId)
             {
                 return NotFound();
             }
@@ -135,12 +157,60 @@ namespace PresentationLayer.Controllers
             {
                 try
                 {
+                    var product = await _context.Products.FindAsync(id);
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update product properties from view model
+                    product.Name = productViewModel.Name ?? "Unnamed Product";  // Default name if null
+                    product.ProductNumber = productViewModel.ProductNumber ?? $"P{DateTime.Now.Ticks}";
+                    product.ListPrice = productViewModel.ListPrice;
+                    product.Size = productViewModel.Size;
+                    product.ProductCategoryId = productViewModel.ProductCategoryId;
+                    product.ProductModelId = productViewModel.ProductModelId;
+
+                    // Handle photo upload
+                    if (productViewModel.Photo != null)
+                    {
+                        string folder = "images/products";
+                        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder);
+
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+
+                        // Delete old photo if exists
+                        if (!string.IsNullOrEmpty(product.ThumbnailPhotoFileName))
+                        {
+                            string oldFilePath = Path.Combine(filePath, product.ThumbnailPhotoFileName);
+                            if (System.IO.File.Exists(oldFilePath))
+                            {
+                                System.IO.File.Delete(oldFilePath);
+                            }
+                        }
+
+                        // Save new photo
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(productViewModel.Photo.FileName);
+                        string fileSavePath = Path.Combine(filePath, fileName);
+
+                        using (var stream = new FileStream(fileSavePath, FileMode.Create))
+                        {
+                            await productViewModel.Photo.CopyToAsync(stream);
+                        }
+
+                        product.ThumbnailPhotoFileName = fileName;
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Table));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ProductId))
+                    if (!ProductExists(productViewModel.ProductId))
                     {
                         return NotFound();
                     }
@@ -149,11 +219,11 @@ namespace PresentationLayer.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Table));
             }
-            ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", product.ProductCategoryId);
-            ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", product.ProductModelId);
-            return View(product);
+
+            ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "ProductCategoryId", "Name", productViewModel.ProductCategoryId);
+            ViewData["ProductModelId"] = new SelectList(_context.ProductModels, "ProductModelId", "Name", productViewModel.ProductModelId);
+            return View(productViewModel);
         }
 
         // GET: Products/Delete/5
